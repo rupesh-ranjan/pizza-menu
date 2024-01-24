@@ -1,5 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import "./index.css";
+
 const pizzaData = [
   {
     name: "Focaccia",
@@ -47,7 +49,7 @@ const pizzaData = [
 
 function App() {
   return (
-    <div>
+    <div className="container">
       <Header />
       <Menu />
       <Footer />
@@ -55,27 +57,44 @@ function App() {
   );
 }
 
-function Pizza() {
-  return (
-    <div>
-      <img src="pizzas\margherita.jpg" alt="pizza" />
-      <h2>Pizza</h2>
-      <p>Enjoy the pizza</p>
-    </div>
-  );
-}
-
 function Header() {
-  return <h1>Hot Delicious Pizza</h1>;
+  // style={{ color: "red", fontSize: "48px", textTransform: "uppercase" }}
+  return (
+    <header className="header">
+      <h1 className="">Hot Delicious Pizza</h1>
+    </header>
+  );
 }
 
 function Menu() {
   return (
-    <div>
+    <main className="menu">
       <h2>Our menu</h2>
-      <Pizza />
-      <Pizza />
-      <Pizza />
+      <Pizza
+        name="Marghrita"
+        ingredients="Tomato, mozarella and many more"
+        photoName="pizzas\margherita.jpg"
+        price={100}
+      />
+      <Pizza
+        name="Pizza Fungi"
+        ingredients="Tomato, mushroom and many more"
+        photoName="pizzas\funghi.jpg"
+        price={101}
+      />
+    </main>
+  );
+}
+
+function Pizza(props) {
+  return (
+    <div className="pizza">
+      <img src={props.photoName} alt="pizza" />
+      <div>
+        <h3>{props.name}</h3>
+        <p>{props.ingredients}</p>
+        <span>{props.price + 1}</span>
+      </div>
     </div>
   );
 }
@@ -85,10 +104,12 @@ function Footer() {
   const openHour = 12;
   const closeHour = 22;
   const isOpen = hour >= openHour && hour <= closeHour;
-  console.log(isOpen);
+  // console.log(isOpen);
 
   return (
-    <footer>{new Date().toLocaleTimeString()}. We're currently open</footer>
+    <footer className="footer">
+      {new Date().toLocaleTimeString()}. We're currently open
+    </footer>
   );
   // return React.createElement("footer", null, "We are currently open");
 }
